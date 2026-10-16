@@ -9,7 +9,7 @@ export default function App() {
       <a className="skip" href="#catalogo">Ir al catálogo</a>
       <Header />
       <main>
-        <Hero />
+        <Hero onPick={setCategory} />
         <Categories onPick={setCategory} />
         <Catalog category={category} onCategory={setCategory} />
         <Trust />
@@ -17,4 +17,4 @@ export default function App() {
       <Footer />
     </>
   )
-}
+};

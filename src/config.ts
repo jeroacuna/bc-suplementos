@@ -7,7 +7,7 @@ export const SITE = {
   whatsappDisplay: '343 446-5982',
   instagram: 'bcsuplementos1',
   // TODO: poné acá la ruta del logo real (ej. '/logo.svg', guardado en /public). Mientras sea null se muestra un wordmark provisorio.
-  logoSrc: null as string | null,
+  logoSrc: '/logo.png' as string | null,
 }
 
 export const messages = {

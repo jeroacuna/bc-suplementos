@@ -10,13 +10,13 @@ export interface Product {
 
 export const CATEGORIES: Category[] = [
   { id: 'proteinas', label: 'Proteínas', shape: 'tub', tone: '#22c55e' },
-  { id: 'creatinas', label: 'Creatinas', shape: 'tub', tone: '#111111' },
+  { id: 'creatinas', label: 'Creatinas', shape: 'tub', tone: '#e8ece9' },
   { id: 'salud', label: 'Colágeno, magnesio y omega 3', shape: 'bottle', tone: '#86efac' },
   { id: 'preentreno', label: 'Pre entreno', shape: 'tub', tone: '#15803d' },
-  { id: 'bcaa', label: 'BCAA', shape: 'tub', tone: '#404040' },
+  { id: 'bcaa', label: 'BCAA', shape: 'tub', tone: '#9aa39d' },
   { id: 'geles', label: 'Geles', shape: 'sachet', tone: '#bbf7d0' },
-  { id: 'quemadores', label: 'Quemadores de grasa', shape: 'bottle', tone: '#052e16' },
-  { id: 'masa', label: 'Aumentador de masa', shape: 'tub', tone: '#166534' },
+  { id: 'quemadores', label: 'Quemadores de grasa', shape: 'bottle', tone: '#4ade80' },
+  { id: 'masa', label: 'Aumentador de masa', shape: 'tub', tone: '#4ade80' },
 ]
 export const CATEGORY_BY_ID = Object.fromEntries(CATEGORIES.map((c) => [c.id, c])) as Record<CategoryId, Category>
 
