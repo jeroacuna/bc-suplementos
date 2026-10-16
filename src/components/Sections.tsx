@@ -1,11 +1,10 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { m, useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react'
 import { SITE, messages, waLink } from '../config'
 import { BRANDS, CATEGORIES, PRODUCTS, type CategoryId } from '../data'
-import { money } from '../lib'
 import { WhatsAppIcon } from './Icons'
 
-const NAV = [['#categorias', 'Categorías'], ['#catalogo', 'Catálogo'], ['#confianza', 'Cómo comprar'], ['#contacto', 'Contacto']]
+const NAV = [['#catalogo', 'Catálogo'], ['#confianza', 'Cómo comprar'], ['#contacto', 'Contacto']]
 const wa = waLink(messages.general)
 const goCatalog = () => document.getElementById('catalogo')?.scrollIntoView()
 
@@ -78,7 +77,7 @@ export function Hero({ onPick }: { onPick: (c: CategoryId) => void }) {
         <m.p variants={rise} className="hero__lead">Proteínas, creatinas, BCAA, pre entreno y más de las marcas que buscás. Elegí tu producto y consultanos directo por WhatsApp.</m.p>
         <m.div variants={rise} className="hero__cta">
           <a className="btn btn--signal" href="#catalogo">Ver catálogo</a>
-          <a className="btn btn--ghost" href="#categorias">Explorar categorías</a>
+          <a className="btn btn--ghost" href={wa} target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
         </m.div>
         <m.div variants={rise} className="hero__quick" role="group" aria-label="Ir directo a una categoría">
           {CATEGORIES.map((c) => (
@@ -93,26 +92,15 @@ export function Hero({ onPick }: { onPick: (c: CategoryId) => void }) {
   )
 }
 
-export function Categories({ onPick }: { onPick: (c: CategoryId) => void }) {
+export function Brands() {
+  const group = (hidden?: boolean) => (
+    <ul className="brands__group" aria-hidden={hidden || undefined}>
+      {BRANDS.map((b) => <li key={b}>{b}</li>)}
+    </ul>
+  )
   return (
-    <section id="categorias" className="section" aria-labelledby="cat-t">
-      <div className="wrap">
-        <Reveal><h2 id="cat-t" className="h-section">Categorías</h2></Reveal>
-        <ul className="tiles">
-          {CATEGORIES.map((c, i) => {
-            const items = PRODUCTS.filter((p) => p.category === c.id)
-            const min = Math.min(...items.flatMap((p) => (p.price != null ? [p.price] : [])))
-            return (
-              <m.li key={c.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.45, delay: (i % 4) * 0.06, ease: 'easeOut' }}>
-                <m.button className="tile" style={{ '--tone': c.tone } as CSSProperties} whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }} onClick={() => { onPick(c.id); goCatalog() }}>
-                  <span className="tile__name">{c.label}</span>
-                  <span className="tile__meta">{items.length} {items.length === 1 ? 'producto' : 'productos'}{Number.isFinite(min) && <> – desde {money(min)}</>}</span>
-                </m.button>
-              </m.li>
-            )
-          })}
-        </ul>
-      </div>
+    <section className="brands" aria-label="Marcas que trabajamos">
+      <div className="brands__track">{group()}{group(true)}</div>
     </section>
   )
 }
@@ -148,7 +136,7 @@ export function Footer() {
     <footer id="contacto" className="footer">
       <div className="wrap footer__in">
         <div><Logo /><p>Suplementos deportivos en {SITE.city}.</p></div>
-        <nav aria-label="Pie de página">{NAV.slice(0, 3).map(([h, l]) => <a key={h} href={h}>{l}</a>)}</nav>
+        <nav aria-label="Pie de página">{NAV.slice(0, 2).map(([h, l]) => <a key={h} href={h}>{l}</a>)}</nav>
         <div className="footer__contact">
           <a href={wa} target="_blank" rel="noopener noreferrer">WhatsApp {SITE.whatsappDisplay}</a>
           <a href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener noreferrer">Instagram @{SITE.instagram}</a>

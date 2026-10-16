@@ -75,13 +75,14 @@ a{color:inherit}button,input,select{font:inherit;color:inherit}
 .pack__label{display:grid;gap:2px;width:84%;padding:12% 6%;background:rgba(8,10,9,.92);color:#fff;text-align:center;border-radius:8px;line-height:1.05;border:1px solid rgba(255,255,255,.2)}
 .pack__label b{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 75;font-size:clamp(.8rem,3.2vw,1.1rem);text-transform:uppercase;overflow-wrap:anywhere}
 .pack__label i{font-style:normal;font-weight:700;font-size:.75rem;color:var(--green-h)}
-/* ===== Categorías ===== */
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3)}
-.tile{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s5);width:100%;min-height:150px;padding:var(--s4);text-align:left;background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--tone);border-radius:var(--r-md);cursor:pointer;transition:border-color .2s,background .2s,box-shadow .25s}
-.tile:hover{border-color:var(--green);border-left-color:var(--tone);background:var(--surface-2);box-shadow:0 10px 30px rgba(34,197,94,.15)}
-.tile__name{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 75;font-size:1.35rem;line-height:1.05}
-.tile__meta{font-size:.85rem;color:var(--muted)}
-@media (min-width:860px){.tiles{grid-template-columns:repeat(4,1fr);gap:var(--s4)}.tile{min-height:170px;padding:var(--s5)}}
+/* ===== Marcas ===== */
+.brands{overflow:hidden;margin-top:var(--s6);padding-block:var(--s4);background:var(--surface);border-block:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.brands__track{display:flex;width:max-content;animation:marquee 40s linear infinite}
+.brands:hover .brands__track{animation-play-state:paused}
+.brands__group{display:flex;flex:none;gap:var(--s7);padding-right:var(--s7)}
+.brands__group li{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 75;font-size:clamp(1.3rem,4vw,1.9rem);text-transform:uppercase;white-space:nowrap;color:#6f7b74;transition:color .2s}
+.brands__group li:hover{color:var(--green-h)}
+@keyframes marquee{to{transform:translateX(-50%)}}
 /* ===== Catálogo ===== */
 .toolbar{display:grid;gap:var(--s3);margin-bottom:var(--s4)}
 .search{position:relative;display:flex;align-items:center}.search>svg{position:absolute;left:var(--s4);color:var(--muted);pointer-events:none}

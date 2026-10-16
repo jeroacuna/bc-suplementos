@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Catalog, type CategoryFilter } from './components/Catalog'
-import { Categories, Footer, Header, Hero, Trust } from './components/Sections'
+import { Brands, Footer, Header, Hero, Trust } from './components/Sections'
 
 export default function App() {
   const [category, setCategory] = useState<CategoryFilter>('all')
@@ -10,7 +10,7 @@ export default function App() {
       <Header />
       <main>
         <Hero onPick={setCategory} />
-        <Categories onPick={setCategory} />
+        <Brands />
         <Catalog category={category} onCategory={setCategory} />
         <Trust />
       </main>
