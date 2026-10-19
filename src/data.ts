@@ -1,5 +1,5 @@
 // ✏️ CATÁLOGO: editá productos acá. Precios y sabores tomados de https://bcsuplementos.tiiny.site/ (verificar antes de publicar).
-export type CategoryId = 'proteinas' | 'creatinas' | 'salud' | 'preentreno' | 'bcaa' | 'geles' | 'quemadores' | 'masa' | 'barritas'
+export type CategoryId = 'proteinas' | 'creatinas' | 'salud' | 'preentreno' | 'bcaa' | 'geles' | 'quemadores' | 'masa' | 'barritas' | 'accesorios'
 export interface Category { id: CategoryId; label: string; shape: 'tub' | 'bottle' | 'sachet'; tone: string }
 export interface Product {
   id: string; name: string; category: CategoryId
@@ -12,13 +12,14 @@ export interface Product {
 export const CATEGORIES: Category[] = [
   { id: 'proteinas', label: 'Proteínas', shape: 'tub', tone: '#22c55e' },
   { id: 'creatinas', label: 'Creatinas', shape: 'tub', tone: '#e8ece9' },
-  { id: 'salud', label: 'Colágeno, magnesio y omega 3', shape: 'bottle', tone: '#86efac' },
-  { id: 'preentreno', label: 'Pre entreno', shape: 'tub', tone: '#15803d' },
-  { id: 'bcaa', label: 'BCAA', shape: 'tub', tone: '#9aa39d' },
-  { id: 'geles', label: 'Geles', shape: 'sachet', tone: '#bbf7d0' },
-  { id: 'quemadores', label: 'Quemadores de grasa', shape: 'bottle', tone: '#4ade80' },
+  { id: 'salud', label: 'Salud y bienestar', shape: 'bottle', tone: '#86efac' },
+  { id: 'preentreno', label: 'Pre y post entreno', shape: 'tub', tone: '#15803d' },
+  { id: 'bcaa', label: 'BCAA y aminoácidos', shape: 'tub', tone: '#9aa39d' },
+  { id: 'geles', label: 'Geles e hidratación', shape: 'sachet', tone: '#bbf7d0' },
+  { id: 'quemadores', label: 'Quemadores y multivitamínicos', shape: 'bottle', tone: '#4ade80' },
   { id: 'masa', label: 'Aumentador de masa', shape: 'tub', tone: '#4ade80' },
   { id: 'barritas', label: 'Barritas', shape: 'sachet', tone: '#34d399' },
+  { id: 'accesorios', label: 'Vasos y accesorios', shape: 'bottle', tone: '#cbd5e1' },
 ]
 export const CATEGORY_BY_ID = Object.fromEntries(CATEGORIES.map((c) => [c.id, c])) as Record<CategoryId, Category>
 
@@ -31,6 +32,15 @@ const PHOTOS = new Set<string>([
   'bcaa-en-polvo-ena',
   'bcaa-one-fit',
   'bcaa-star-nutrition',
+  'beta-alanina-star-nutrition-300-g',
+  'beta-alanina-xbody-300-g',
+  'cafeina-ena-60-usos',
+  'caffeine-200-star-nutrition-30-capsulas',
+  'capsulas-de-electrolitos-pro-salts-nutremax-60-usos',
+  'colageno-hydroflex-xbody-330-g',
+  'colageno-optimus-one-fit-240-g',
+  'colageno-plus-star-nutrition-360-g',
+  'colageno-pure-innolab-20-usos',
   'colageno-sport-ena-30-usos',
   'creatina-con-electrolitos',
   'creatina-en-doy-pack-xbody-300-g',
@@ -47,8 +57,12 @@ const PHOTOS = new Set<string>([
   'creatina-star-nutrition-300-g',
   'creatina-xbody-1-kg',
   'cutter-quemador',
+  'formula-isotonica-hydro-max-nutremax-20-usos',
+  'formula-isotonica-hydro-max-nutremax-40-usos',
   'gel-con-cafeina-caja-nutremax-12-unidades',
   'gel-con-cafeina-unidad-nutremax',
+  'glutamina-star-nutrition-300-g',
+  'glutamina-xbody-300-g',
   'iron-bar-banana-gentech',
   'iron-bar-chocolate-gentech',
   'iron-bar-coco-gentech',
@@ -57,10 +71,17 @@ const PHOTOS = new Set<string>([
   'iron-bar-frutilla-gentech',
   'magnesio-en-polvo-sabor-limonada-60-usos',
   'magnesio-one-fit-60-usos',
+  'multivitaminico-ena-60-usos',
   'multivitaminico-htn',
   'multivitaminico-star-nutrition',
+  'nad-nicotinamida-adenina-dinucleotido-gold-nutrition-30-usos',
   'omega-3-gold-nutrition-30-usos',
   'omega-3-star-nutrition-30-usos',
+  'oxido-nitrico-5-1-one-fit-210-g',
+  'oxido-nitrico-pre-entreno-ena-210-g',
+  'plant-protein-star-nutrition-1-kg',
+  'post-entreno-muscle-max-ena-90-tabs',
+  'pre-entreno-beta-alanine-ena-60-tabs',
   'pre-entreno-v8-star-nutrition',
   'pre-entreno-war-ena',
   'proteina-body-advance-1-kg',
@@ -70,13 +91,21 @@ const PHOTOS = new Set<string>([
   'proteina-gentech-1-kg',
   'proteina-gold-nutrition-1-kg',
   'proteina-one-fit-1-kg',
+  'proteina-ovoalbumina-pulver-1-kg',
   'proteina-xbody-1-kg',
+  'resveratrol-star-nutrition-60-usos',
+  'soy-protein-htn-33-usos',
+  'testofull-ultra-pro-hormonal-xbody',
+  'vaso-nutremax',
+  'vaso-one-fit',
+  'vaso-xbody',
+  'vitaminas-k2-d3-star-nutrition-60-usos',
 ])
 const P = (category: CategoryId, name: string, brand: string | undefined, size: string | undefined, price: number, flavors?: string[], priceNote?: string, description?: string): Product =>
   { const id = slug(name, brand, size); return { id, category, name, brand, size, price, flavors, priceNote, description, image: PHOTOS.has(id) ? `/productos/${id}.webp` : undefined } }
 
 const S = 'Star Nutrition', G = 'Gold Nutrition'
-export const PRODUCTS: Product[] = [
+const RAW: Product[] = [
   P('proteinas', 'Proteína Endoy Pack', S, '1 kg', 88000, ['Frutilla', 'Vainilla', 'Chocolate', 'Cookies', 'Banana']),
   P('proteinas', 'Proteína', 'Ena', '500 g', 55000, ['Chocolate', 'Vainilla', 'Sin sabor']),
   P('proteinas', 'Proteína', 'Ena', '1 kg', 85000, ['Chocolate', 'Vainilla', 'Cookies', 'Frutilla']),
@@ -117,10 +146,41 @@ export const PRODUCTS: Product[] = [
   P('quemadores', 'Multivitamínico', 'HTN', undefined, 23000),
   P('quemadores', 'Multivitamínico', S, undefined, 27500),
   P('masa', 'Aumentador de masa', 'Ena', '1,5 kg', 58000, ['Chocolate', 'Vainilla']),
+  // Productos nuevos (lista del 19/10). Precios según lo que pasó BC; verificar antes de publicar.
+  P('proteinas', 'Proteína ovoalbúmina', 'Pulver', '1 kg', 64800),
+  P('proteinas', 'Soy Protein', 'HTN', '33 usos', 50000),
+  P('proteinas', 'Plant Protein', 'Star Nutrition', '1 kg', 52000),
+  P('salud', 'Colágeno Hydroflex', 'Xbody', '330 g', 26300),
+  P('salud', 'Colágeno Plus', 'Star Nutrition', '360 g', 30000),
+  P('salud', 'Colágeno Optimus', 'One Fit', '240 g', 22500),
+  P('salud', 'Colágeno Pure', 'Innolab', '20 usos', 27800),
+  P('salud', 'Vitaminas K2 + D3', S, '60 usos', 30000),
+  P('salud', 'Resveratrol', S, '60 usos', 28300),
+  P('salud', 'NAD+ (nicotinamida adenina dinucleótido)', G, '30 usos', 27000),
+  P('salud', 'Testofull Ultra pro-hormonal', 'Xbody', undefined, 25100),
+  P('preentreno', 'Pre entreno Beta Alanine', 'Ena', '60 tabs', 22000),
+  P('preentreno', 'Post entreno Muscle Max', 'Ena', '90 tabs', 21600),
+  P('preentreno', 'Óxido nítrico pre entreno', 'Ena', '210 g', 26700),
+  P('preentreno', 'Óxido nítrico 5.1', 'One Fit', '210 g', 24400),
+  P('preentreno', 'Cafeína', 'Ena', '60 usos', 20600),
+  P('preentreno', 'Caffeine 200', S, '30 cápsulas', 19500),
+  P('bcaa', 'Beta alanina', 'Xbody', '300 g', 22600),
+  P('bcaa', 'Beta alanina', S, '300 g', 33500),
+  P('bcaa', 'Glutamina', S, '300 g', 34000),
+  P('bcaa', 'Glutamina', 'Xbody', '300 g', 27000),
+  P('bcaa', 'Glutamina', 'One Fit', '150 g', 25200),
+  P('geles', 'Cápsulas de electrolitos Pro Salts', 'Nutremax', '60 usos', 19500),
+  P('geles', 'Fórmula isotónica Hydro Max', 'Nutremax', '40 usos', 26800),
+  P('geles', 'Fórmula isotónica Hydro Max', 'Nutremax', '20 usos', 21800),
+  P('quemadores', 'Multivitamínico', 'Ena', '60 usos', 26000),
+  P('accesorios', 'Vaso', 'Xbody', undefined, 12500, undefined, 'c/u'),
+  P('accesorios', 'Vaso', 'One Fit', undefined, 12500, undefined, 'c/u'),
+  P('accesorios', 'Vaso', 'Nutremax', undefined, 15000, undefined, 'c/u'),
   // Barritas Gentech Iron Bar: unidad $4.000, caja de 20 $45.000 (la caja se separa por sabor cuando lleguen las fotos)
   ...(
     [['Banana', '#eab308'], ['Cookies and Cream', '#38bdf8'], ['Coco', '#e8ece9'], ['Chocolate', '#a16207'], ['Frutilla', '#e11d48'], ['Dulce de leche crunch', '#ea580c']] as const
   ).map(([flavor, tone]) => ({ ...P('barritas', `Iron Bar ${flavor}`, 'Gentech', undefined, 4000, undefined, 'c/u'), tone })),
   P('barritas', 'Iron Bar, caja', 'Gentech', '20 unidades', 45000, undefined, 'por caja'),
 ]
+export const PRODUCTS: Product[] = [...RAW].sort((a, b) => CATEGORIES.findIndex((c) => c.id === a.category) - CATEGORIES.findIndex((c) => c.id === b.category))
 export const BRANDS = [...new Set(PRODUCTS.flatMap((p) => (p.brand ? [p.brand] : [])))]
